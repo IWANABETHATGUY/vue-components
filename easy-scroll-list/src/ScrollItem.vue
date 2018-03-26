@@ -1,5 +1,5 @@
 <template>
-  <li  style="width: 100%; list-style:none;display:block;" :class="className">
+  <li :class="className">
     <slot name="content" ></slot>
   </li>
 </template>
@@ -19,5 +19,9 @@ export default {
 }
 </script>
 <style>
-
+  .easy-scroll-item {
+    display:block;
+    width: 100%; 
+    list-style:none;
+  }
 </style>
