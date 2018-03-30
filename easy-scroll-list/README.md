@@ -144,10 +144,10 @@ content | to insert the content
 
 
 # todoList
-[x] pull down to refresh  
-[x] pull up to lazy-load  
-[x] change the default behavior of mousewheel, you can use mousewheel to move the list  
-[] add inertial sliding
+- [x] pull down to refresh  
+- [x] pull up to lazy-load  
+- [x] change the default behavior of mousewheel, you can use mousewheel to move the list  
+- [] add inertial sliding
 
 
 
