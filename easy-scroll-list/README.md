@@ -22,7 +22,7 @@ new Vue({
 > then you can use the components in your template 
 ```html
 <template>
-  <scroll-container :className="'container'"  @on-refresh="refreshList">
+  <scroll-container :className="'container'"  @on-refresh="refreshList" @on-pre-load="handleLoadMore">
     <scroll-item :className="'scroll-item'" v-for="(item, index) in list" :key="index" >
       <div slot="content">{{item}}</div>
     </scroll-item>
@@ -35,27 +35,37 @@ new Vue({
 export default {
   data() {
     return {
-      list: [],
-    }
+      list: []
+    };
   },
   methods: {
     refreshList(next) {
-      this.$refs.loading.classList.add('active');
+      this.$refs.loading.classList.add("active");
       setTimeout(() => {
         this.list = new Array(20).fill().map((item, index) => {
           return parseInt(Math.random() * 20);
-        })
-        this.$refs.loading.classList.remove('active');
+        });
+        this.$refs.loading.classList.remove("active");
         next();
-      }, 3000)
+      }, 1000);
+    },
+    handleLoadMore(next) {
+      setTimeout(() => {
+        this.list = this.list.concat(
+          new Array(20).fill().map((item, index) => {
+            return parseInt(Math.random() * 20);
+          })
+        );
+        next();
+      }, 2000);
     }
   },
   mounted() {
     this.list = new Array(20).fill().map((item, index) => {
       return parseInt(Math.random() * 20);
-    })
+    });
   }
-}
+};
 ```
 ```css
   .container {
@@ -93,9 +103,9 @@ export default {
     user-select: none;
   }
 ```
-> then you get the scroller like this   
+> then you get the scroll-container like this   
 
-![](http://ouck2t8ui.bkt.clouddn.com/scrollgif.gif)
+![](http://ouck2t8ui.bkt.clouddn.com/scrollContainer.gif)
 
 # scroll-container
 > props
@@ -109,8 +119,8 @@ className | className for container
 
 eventName | use
 ------------ | --------------------------------------------------------------------
-on-refresh | when you drag the list to the top, and you continue to pull down the list will emit this event with a function , you need to invoke the  function Explicitly to recover the scroll-list after the asynchronous task
-
+on-refresh (next) | when you drag the list to the top, and you continue to pull down the list will emit this event with a function , you need to invoke the  next function Explicitly to recover the scroll-list after the asynchronous task
+on-pre-load (next) | when you drag the list to the bottom, you will emit this event with a function , you need to invoke the  next function Explicitly to reset information of the scroll-list(like offsetHeight) after the asynchronous task
 > slot
 
 slotName | use
@@ -131,6 +141,13 @@ className | className for scroll-item
 slotName | use
 ------------ | -------------
 content | to insert the content
+
+
+# todoList
+[x] pull down to refresh  
+[x] pull up to lazy-load  
+[x] change the default behavior of mousewheel, you can use mousewheel to move the list  
+[] add inertial sliding
 
 
 
