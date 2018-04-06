@@ -57,7 +57,7 @@ export default {
           })
         );
         next();
-      }, 2000);
+      }, 0);
     }
   },
   mounted() {
@@ -105,7 +105,7 @@ export default {
 ```
 > then you get the scroll-container like this   
 
-![](http://ouck2t8ui.bkt.clouddn.com/scrollContainer.gif)
+![](http://ouck2t8ui.bkt.clouddn.com/scroll.gif)
 
 # scroll-container
 > props
@@ -147,7 +147,7 @@ content | to insert the content
 - [x] pull down to refresh  
 - [x] pull up to lazy-load  
 - [x] change the default behavior of mousewheel, you can use mousewheel to move the list  
-- [] add inertial sliding
+- [x] add inertial sliding
 
 
 
